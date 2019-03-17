@@ -6,60 +6,46 @@ import { connect } from 'react-redux';
 
 class Login extends Component {
     constructor() {
-        super();
-        this.state = {
-            pass : false,
-            loggedin : false
-        }
-    }
-    handleNext = () => {
-        this.setState({
-            pass : true
-        })
-    }
-
-    handleCancel =() => {
-        this.setState({
-            pass : false
-        })
-    }
-    handleLogin = () => {
-        this.setState({
-            loggedin : true,
-            pass : true
-        })
-    }
+        super();       
+    }    
+    
     render() {
-        debugger;
-        if (!this.state.pass) {
+        if (!this.props.pass) {
             return (
                 <>
                     <fieldset className="login">
-                        <legend>Username</legend>
-                        <input type="text" placeholder="Enter username and press Next"/>
+                    { this.props.focus === 'username'
+                        ? <legend>Username</legend>
+                        : null
+                    }                        
+                        <input id="username" type="text" placeholder={this.props.focus === 'username'?'':'Enter username and press Next'} 
+                        onFocus={this.props.focusme.bind(this)} ref={(input) => this.username = input} onBlur={this.props.blurme.bind(this)}/>
                     </fieldset>
                     <div className="grid-container-2 login-links">
                         <span className="action-link"><Link to="/register">Create Account</Link></span>
-                        <span className="action-btn"><button onClick={this.handleNext.bind(this)}>Next</button></span>
+                        <span className="action-btn"><button onClick={() => this.props.onNext('passwrd')}>Next</button></span>
                     </div>
                 </>
             )
         }
-        else if (this.state.loggedin) {
+        else if (this.props.loggedin) {
             return (
-                <Home loggedin={this.state.loggedin} />
+                <Home loggedin={this.props.loggedin} />
             )
         }
         else {
             return (
                 <>
                     <fieldset className="login">
-                        <legend>Password</legend>
-                        <input type="password" />
+                    { this.props.focus === 'passwrd'
+                        ? <legend>Password</legend>
+                        : null
+                    } 
+                        <input type="password" id="passwrd" onFocus={this.props.focusme.bind(this)} onBlur={this.props.blurme.bind(this)}/>
                     </fieldset>
                     <div className="grid-container-2 login-links">
-                        <span className="action-link"><a href="#" onClick={this.handleCancel.bind(this)}>Cancel</a></span>
-                        <span className="action-btn"><button onClick={this.handleLogin.bind(this)}>Next</button></span>
+                        <span className="action-link"><a href="#" onClick={this.props.cancel}>Cancel</a></span>
+                        <span className="action-btn"><button onClick={this.props.onLogin}>Next</button></span>
                     </div>
                 </>
             )
@@ -69,13 +55,19 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        loggedin : state.loggedin
+        loggedin : state.rLogin.loggedin,
+        pass : state.rLogin.pass,
+        focus : state.rLogin.focus
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLogin : () => dispatch({type : 'login'})
+        onNext : (id) => dispatch({type : 'showpass', id : id}),
+        cancel : () => dispatch({type : 'cancel'}),
+        onLogin : () => dispatch({type : 'login'}),
+        focusme : (event) => dispatch({type : 'focus', id : event.target.id}),
+        blurme : () => dispatch({type : 'blur'}),
     }
 }
 

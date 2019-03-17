@@ -5,10 +5,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import reducer from './store/reducer';
+import { createStore, combineReducers } from 'redux';
+import reducerLogin from './store/reducerLogin';
 
-const store = createStore(reducer);
+const rootReducer = combineReducers({
+    rLogin : reducerLogin
+})
+const store = createStore(rootReducer);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

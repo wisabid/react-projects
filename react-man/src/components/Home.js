@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { Redirect, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 class Home extends Component {
     constructor() {
-        super();
-        this.state = {
-            loggedin : false
-        }
+        super();        
     }
 
     componentWillMount() {
-        debugger;
         if (this.props.loggedin) {
             this.setState({
                 loggedin : true
@@ -18,7 +15,8 @@ class Home extends Component {
         }
     }
     render() {
-        if (!this.state.loggedin) {
+        debugger;
+        if (!this.props.loggedin) {
             return (
                 <Redirect to="/" />
             )
@@ -27,11 +25,21 @@ class Home extends Component {
             return (
                 <>
                     <h1>Welcome</h1>
-                    <NavLink to="/register" >logout </NavLink>
+                    <button onClick={this.props.logout}>Log out</button>
                 </>
             )
         }
     }
 }
+const mapStateToProps = (state) => {
+    return {
+    }
+}
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout : () => dispatch({type : 'logout'})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -33,7 +33,7 @@
   }
 }
 
-/*  */
+/* Common styles */
 .App {
   display: flex;
   flex-direction: column;
@@ -59,8 +59,24 @@ button {
   display: grid;
   grid-template-columns: 50% 50%;  
 }
-/*  */
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: #fff;
+}
+/* fieldset.focusme {
+  border-color: #4285f4;
+  border-width: 2px;
+} */
+/* Common styles end here   */
 /* Login Component styles */
+/* .login {
+  width: 50%;
+  text-align: left;
+  margin: 0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border-color: #ccc;
+  border-width: 0.5px;
+} */
 .login {
   width: 50%;
   text-align: left;
