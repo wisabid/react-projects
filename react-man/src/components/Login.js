@@ -3,6 +3,7 @@ import loginWrapper from './../HOC/loginWrapper';
 import Home from './Home';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as actionCreator from '../store/actions/actionsLogin';
 
 class Login extends Component {
     constructor() {
@@ -17,8 +18,12 @@ class Login extends Component {
                     { this.props.focus === 'username'
                         ? <legend>Username</legend>
                         : null
-                    }                        
-                        <input id="username" type="text" placeholder={this.props.focus === 'username'?'':'Enter username and press Next'} 
+                    }   
+                    { this.props.loading
+                        ? <legend>Loading...</legend>
+                        : null
+                    }                     
+                        <input autoComplete="off" id="username" type="text" placeholder={this.props.focus === 'username'?'':'Enter username and press Next'} 
                         onFocus={this.props.focusme.bind(this)} ref={(input) => this.username = input} onBlur={this.props.blurme.bind(this)}/>
                     </fieldset>
                     <div className="grid-container-2 login-links">
@@ -57,13 +62,14 @@ const mapStateToProps = (state) => {
     return {
         loggedin : state.rLogin.loggedin,
         pass : state.rLogin.pass,
-        focus : state.rLogin.focus
+        focus : state.rLogin.focus,
+        loading : state.rLogin.loading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onNext : (id) => dispatch({type : 'showpass', id : id}),
+        onNext : (id) => dispatch(actionCreator.showpass(id)),
         cancel : () => dispatch({type : 'cancel'}),
         onLogin : () => dispatch({type : 'login'}),
         focusme : (event) => dispatch({type : 'focus', id : event.target.id}),

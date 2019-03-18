@@ -5,13 +5,24 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import reducerLogin from './store/reducerLogin';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import reducerLogin from './store/reducers/reducerLogin';
+import thunk from 'redux-thunk';
+
+const mymiddleware = store => {
+    return next => {
+        return action => {
+            const result = next(action);
+            console.log(`Caught in the middleware ${JSON.stringify(result)}`);
+            return result;
+        }
+    }
+}
 
 const rootReducer = combineReducers({
     rLogin : reducerLogin
 })
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 

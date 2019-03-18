@@ -8,14 +8,9 @@ class Home extends Component {
     }
 
     componentWillMount() {
-        if (this.props.loggedin) {
-            this.setState({
-                loggedin : true
-            })
-        }
+        
     }
     render() {
-        debugger;
         if (!this.props.loggedin) {
             return (
                 <Redirect to="/" />
