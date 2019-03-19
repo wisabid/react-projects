@@ -69,7 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onNext : (id) => dispatch(actionCreator.showpass(id)),
+        // onNext : (id) => dispatch(actionCreator.showpass(id)), //this is using redux-thunk
+        onNext: (id) => dispatch({type : 'showpass', id : id}),
         cancel : () => dispatch({type : 'cancel'}),
         onLogin : () => dispatch({type : 'login'}),
         focusme : (event) => dispatch({type : 'focus', id : event.target.id}),

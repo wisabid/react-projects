@@ -7,7 +7,7 @@ const initialState = {
 
 const reducerLogin = (state = initialState, action) => {
     const newState = {...state}
-    if (action.type === 'showpass') {
+    if (action.type === 'showpassfield') {
         newState.loading = false;
         newState.pass = true;
         newState.focus = action.id;

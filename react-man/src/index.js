@@ -7,7 +7,11 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import reducerLogin from './store/reducers/reducerLogin';
-import thunk from 'redux-thunk';
+//import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import {watchLogin} from './sagas/saga';
+
+const sagaMiddleware = createSagaMiddleware();
 
 const mymiddleware = store => {
     return next => {
@@ -22,7 +26,9 @@ const mymiddleware = store => {
 const rootReducer = combineReducers({
     rLogin : reducerLogin
 })
-const store = createStore(rootReducer, applyMiddleware(thunk));
+// const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+sagaMiddleware.run(watchLogin)
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
