@@ -59,14 +59,34 @@ button {
   display: grid;
   grid-template-columns: 50% 50%;  
 }
+fieldset {
+  text-align: left;
+  margin: 0;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border-color: #4285f4;
+}
+fieldset legend {
+  font-size: 0.7rem;
+  color: #1a73e8;
+  font-weight: bold;
+}
 input[type="text"]:focus, input[type="password"]:focus {
   outline: #fff;
+}
+fieldset input {
+  width: 98%;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  padding:5px;
 }
 /* fieldset.focusme {
   border-color: #4285f4;
   border-width: 2px;
 } */
 /* Common styles end here   */
+
 /* Login Component styles */
 /* .login {
   width: 50%;
@@ -77,26 +97,12 @@ input[type="text"]:focus, input[type="password"]:focus {
   border-color: #ccc;
   border-width: 0.5px;
 } */
+
 .login {
-  width: 50%;
-  text-align: left;
-  margin: 0;
-  border-radius: 5px;
-  margin-bottom: 10px;
-  border-color: #4285f4;
+  width: 50%;  
 }
-.login legend {
-  font-size: 0.7rem;
-  color: #1a73e8;
-  font-weight: bold;
-}
-.login input {
-    width: 98%;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    padding:5px;
-}
+
+
 .login-links {
   width:50%;
   margin:10px 0;

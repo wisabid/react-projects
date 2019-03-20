@@ -24,11 +24,10 @@ const reducerLogin = (state = initialState, action) => {
         newState.loggedin = true;
     }
 
-
     if (action.type === 'focus') {
         newState.focus = action.id;
     }
-    else if (action.type === 'blur') {
+    else if (action.type === 'blurme') {
         newState.focus = '';
     }
 
