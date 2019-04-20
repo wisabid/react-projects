@@ -85,6 +85,9 @@ fieldset input {
   border-color: #4285f4;
   border-width: 2px;
 } */
+.keep-right {
+  float: right;
+}
 /* Common styles end here   */
 
 /* Login Component styles */

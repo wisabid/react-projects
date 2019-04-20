@@ -8,7 +8,7 @@ function* showpassAsync(props) {
     // yield put({type : 'blurme'})
     // yield cancel({type : 'blurme'})
     yield put({type : 'loading'})
-    yield delay(2000);
+    yield delay(500);
     yield put({type : 'showpassfield', id : props.id})
 }
 

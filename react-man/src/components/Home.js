@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Logout from './Logout';
+import Login from './Login';
 
 class Home extends Component {
     constructor() {
@@ -19,8 +21,8 @@ class Home extends Component {
         else {
             return (
                 <>
+                    <Logout logout={this.props.logout}/>
                     <h1>Welcome</h1>
-                    <button onClick={this.props.logout}>Log out</button>
                 </>
             )
         }
@@ -28,6 +30,7 @@ class Home extends Component {
 }
 const mapStateToProps = (state) => {
     return {
+        loggedin : state.rLogin.loggedin
     }
 }
 

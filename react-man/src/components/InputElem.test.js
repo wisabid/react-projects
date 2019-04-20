@@ -18,4 +18,19 @@ describe('<inputElem />', () => {
         expect(wrapper.find('#passwrd')).toHaveLength(1);
     })
 
+    it('component should render a legend tag displaying field name when focussed', () => {
+        const wrapper = shallow(<InputElem elid="username" eltype="text" fieldname="Username" focus="username"/>)
+        expect(wrapper.find('legend')).toHaveLength(1);
+    })
+
+    it('component should NOT render a legend tag when blurred', () => {
+        const wrapper = shallow(<InputElem elid="username" eltype="text" fieldname="Username" focus="passwrd"/>)
+        expect(wrapper.find('legend')).toHaveLength(0);
+    })
+
+    it('component should render a placeholder text on text input tag when blurred', () => {
+        const wrapper = shallow(<InputElem elid="username" placeholder="Enter username and press Next" eltype="text" fieldname="Username" focus="passwrd"/>)
+        expect(wrapper.find('input[placeholder="Enter username and press Next"]')).toHaveLength(1);
+    })
+
 })
