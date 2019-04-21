@@ -1,0 +1,18 @@
+.annoy-container {
+    display: grid;
+    grid-template-columns: 2fr 5fr 3fr;
+    grid-template-rows: auto 5fr 1fr;
+    grid-gap: 10px;
+    height: 99vh;
+}
+.msg-box {
+    grid-column: span 3;
+}
+header {
+    grid-column: span 3;
+}
+
+div {
+    border: 1px solid slateblue;
+    border-radius : 5px;    
+}
