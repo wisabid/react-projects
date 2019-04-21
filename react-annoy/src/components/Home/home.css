@@ -4,6 +4,7 @@
     grid-template-rows: auto 5fr 1fr;
     grid-gap: 10px;
     height: 99vh;
+    width: 100%;
 }
 .msg-box {
     grid-column: span 3;
