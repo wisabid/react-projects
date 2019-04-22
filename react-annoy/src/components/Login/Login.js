@@ -1,62 +1,61 @@
-import React, { Component } from 'react';
+import React from 'react';
 // import loginWrapper from './../HOC/loginWrapper';
-import Home from '../Home';
+import Home from '../../containers/Home';
 // import { Link } from 'react-router-dom';
 import './login.css'
-
+import UserContext from '../../context/UserContext'
 import InputElem from '../InputElem';
 
-class Login extends Component {
-    constructor() {
-        super();       
-    }    
-    
-    render() {
+const Login = (props) => {
         debugger;
-        if (!this.props.pass) {
+        if (!props.pass) {
             return (
-                <>
-                    <fieldset className="login">
-                   
-                        <InputElem elid="username" placeholder="Enter username and press Next" focusme={this.props.focusme.bind(this)} 
-                        blurme={this.props.blurme.bind(this)} eltype="text" loading={this.props.loading} focus={this.props.focus} 
-                        fieldname="Username"/>                   
-                        
-                    </fieldset>
-                    
-                    <div className="grid-container-2 login-links">
-                        {/* <span className="action-link"><Link to="/register">Create Account</Link></span> */}
-                        <span className="action-btn"><button onClick={() => this.props.onNext('passwrd')}>Next</button></span>
-                    </div>
-                </>
+                <UserContext.Consumer>
+                    {context => (
+                        <>
+                            <fieldset className="login">
+                                <InputElem elid="username" placeholder="Enter username and press Next" focusme={props.focusme.bind(this)} 
+                                blurme={props.blurme.bind(this)} eltype="text" loading={props.loading} focus={props.focus} 
+                                fieldname="Username"/>                   
+                                
+                            </fieldset>
+                            
+                            <div className="grid-container-2 login-links">
+                                {/* <span className="action-link"><Link to="/register">Create Account</Link></span> */}
+                                <span className="action-link">Create Account</span>
+                                <span className="action-btn"><button onClick={() => {context.setUser('Alfie');props.onNext('passwrd')}}>Next</button></span>
+                            </div>
+                        </>
+                    )}
+                </UserContext.Consumer>
+                
             )
         }
-        else if (this.props.loggedin) {
+        else if (props.loggedin) {
             return (
-                <Home loggedin={this.props.loggedin} />
+                <Home loggedin={props.loggedin} />
             )
         }
         else {
             return (
                 <>
                     <fieldset className="login">
-                    { this.props.focus === 'passwrd'
+                    { props.focus === 'passwrd'
                         ? <legend>Password</legend>
                         : null
                     } 
                         
-                        <InputElem elid="password" fieldname="Password" focusme={this.props.focusme.bind(this)} 
-                        blurme={this.props.blurme.bind(this)} eltype="password" loading={this.props.loading} focus={this.props.focus}/> 
+                        <InputElem elid="password" fieldname="Password" focusme={props.focusme.bind(this)} 
+                        blurme={props.blurme.bind(this)} eltype="password" loading={props.loading} focus={props.focus}/> 
                         
                     </fieldset>
                     <div className="grid-container-2 login-links">
-                        <span className="action-link"><a href="#" onClick={this.props.cancel}>Cancel</a></span>
-                        <span className="action-btn"><button onClick={this.props.onLogin}>Next</button></span>
+                        <span className="action-link"><a href="#" onClick={props.cancel}>Cancel</a></span>
+                        <span className="action-btn"><button onClick={props.onLogin}>Next</button></span>
                     </div>
                 </>
             )
         }
     }
-}
 
 export default Login;

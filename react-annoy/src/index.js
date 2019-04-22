@@ -7,16 +7,17 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import reducerLogin from './store/reducers/reducerLogin';
 import createSagaMiddleware from 'redux-saga';
-import {watchLogin} from './sagas/saga';
+import {handleApp} from './sagas';
+import Socket from './sockets'
 
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
     rLogin : reducerLogin
 })
-// const store = createStore(rootReducer, applyMiddleware(thunk));
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(watchLogin)
+const webS = Socket(store.dispatch);
+sagaMiddleware.run(handleApp, {webS, dispatch : store.dispatch})
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
