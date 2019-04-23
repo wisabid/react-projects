@@ -2,7 +2,6 @@ import React from 'react';
 
 const InputElem = (props) => {
     let username;
-    debugger;
     return (
         <>
             { props.focus === props.elid

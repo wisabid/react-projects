@@ -6,7 +6,6 @@ const initialState = {
 }
 
 const reducerLogin = (state = initialState, action) => {
-    debugger;
     const newState = {...state}
     if (action.type === 'showpassfield') {
         newState.loading = false;

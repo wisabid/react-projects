@@ -23,7 +23,7 @@ const Home = (props) => {
                         fieldname="message-input"/>                                       
                     </fieldset>
                     <div className="grid-container-2 login-links">
-                        <span className="action-btn"><button onClick={() => {props.sendmessage()}}>Send</button></span>
+                        <span className="action-btn"><button onClick={(e) => {e.preventDefault();props.sendmessage()}}>Send</button></span>
                     </div>
                 </form>
             </div>

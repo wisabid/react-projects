@@ -15,10 +15,11 @@ function* blurupdate(props) {
     yield put({type : 'blurme'})
 }
 
-export function* handleApp(params) {
+export const handleApp = function* (params) {
     yield takeLatest('blur', blurupdate)
     yield takeLatest('showpass', showpassAsync)
     yield takeEvery('NEW_MESSAGE', action => {
-
+        debugger;
+        // params.webS.waitForConnection(() => params.webS.send(JSON.stringify({type : 'NEW_MESSAGE', data : {message : 'dfgdfgdfgdfgdfg'}})))   
     })
 }

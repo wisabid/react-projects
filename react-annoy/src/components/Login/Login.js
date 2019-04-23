@@ -7,7 +7,6 @@ import UserContext from '../../context/UserContext'
 import InputElem from '../InputElem';
 
 const Login = (props) => {
-        debugger;
         if (!props.pass) {
             return (
                 <UserContext.Consumer>

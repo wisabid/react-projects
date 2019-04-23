@@ -1,6 +1,6 @@
 
 const setupSocket = (dispatch, username) => {
-    const socket = new WebSocket('ws://192.168.99.100:8889');
+    const socket = new WebSocket('ws://locahost:8989');
     socket.onopen = () => {
         console.log('Connection is open my boy!', socket);
     }
