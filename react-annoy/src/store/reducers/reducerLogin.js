@@ -2,7 +2,6 @@ const initialState = {
     pass : false,
     loggedin : false,
     focus : '',
-    loading : false
 }
 
 const reducerLogin = (state = initialState, action) => {
