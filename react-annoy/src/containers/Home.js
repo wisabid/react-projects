@@ -4,7 +4,8 @@ import HomeComp from '../components/Home'
 const mapStateToProps = (state) => {
     return {
         loggedin : state.rLogin.loggedin,
-        loading : state.rLogin.loading
+        loading : state.rLogin.loading,
+        messages : state.rLogin.messages
     }
 }
 

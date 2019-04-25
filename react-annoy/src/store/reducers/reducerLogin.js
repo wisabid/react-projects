@@ -2,10 +2,19 @@ const initialState = {
     pass : false,
     loggedin : false,
     focus : '',
+    messages : []
 }
 
 const reducerLogin = (state = initialState, action) => {
     const newState = {...state}
+    switch (action.type) {
+        case 'SHOW_MESSAGE':
+        debugger;
+            return { ...newState, messages : ['Hi Alfie']}
+        default: 
+            return newState;
+    }
+
     if (action.type === 'showpassfield') {
         newState.loading = false;
         newState.pass = true;

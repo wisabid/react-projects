@@ -1,15 +1,17 @@
 
 const setupSocket = (dispatch, username) => {
-    const socket = new WebSocket('ws://locahost:8989');
+    const socket = new WebSocket('ws://localhost:8989');
     socket.onopen = () => {
         console.log('Connection is open my boy!', socket);
     }
-    socket.onmessage = (event) => {       
+    socket.onmessage = (event) => {      
+        debugger; 
         console.log('YOU HAVE A MESSAGE MY BOY ');        
         let data = JSON.parse(event.data);
         console.table('MESSAGE_RECEIVED', data);
         switch(data.type) {
-            
+            case 'NEW_MESSAGE':
+                dispatch({type: 'SHOW_MESSAGE', data : data.data})
             default :
         }
     }

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './home.css';
 import UserContext from '../../context/UserContext';
 import InputElem from '../InputElem';
+import MessageBox from '../../containers/MessageBox'
 
 const Home = (props) => {
     const { user } = useContext(UserContext)
@@ -9,24 +10,24 @@ const Home = (props) => {
     const sendmessage = () => {
         debugger;
     }
+    debugger;
     return (
         <section className="annoy-container">
             <header>Hello {user}</header>
             <div>dfgdfgdfg</div>
-            <div>dfgdfgdfg</div>
-            <div>dfgdfgdfg</div>
-            <div className="msg-box">
-                <form onSubmit={props.sendmessage}>
-                    <fieldset className="login">
-                        <InputElem elid="username" placeholder="Enter message and press Enter" focusme={props.focusme} 
-                        blurme={props.blurme} eltype="text" loading={props.loading} focus={props.focus} 
-                        fieldname="message-input"/>                                       
-                    </fieldset>
-                    <div className="grid-container-2 login-links">
-                        <span className="action-btn"><button onClick={(e) => {e.preventDefault();props.sendmessage()}}>Send</button></span>
-                    </div>
-                </form>
+            <div>
+                <ul>
+                {
+                    props.messages.map((item, index) => {
+                        return (
+                            <li key={index}>item.message</li>
+                        )
+                    })
+                }
+                </ul>
             </div>
+            <div>dfgdfgdfg</div>
+            <MessageBox />
         </section>
     )
 }

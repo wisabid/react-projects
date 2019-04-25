@@ -17,8 +17,8 @@ const Login = (props) => {
             }
         }
         const [state, dispatch] = useReducer(loginreducer, {
-            pass : false,
-            loggedin : false,
+            pass : true,
+            loggedin : true,
             focus : '',
             loading : false
         });

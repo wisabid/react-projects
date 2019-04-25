@@ -2,23 +2,28 @@
 var WebSocket = require('ws')
 
 const wss = new WebSocket.Server({ port : 8989 });
-
+console.log('welcome')
 const users = [];
 
 const broadcast = (data, ws) => {
-    console.log('CLIENTS', wss.clients)
+    // console.log('CLIENTS', wss.clients)
+    // console.log('going to broadcast!!', wss.clients)
     wss.clients.forEach(client => {
-        if (client.readyState === WebSocket.OPEN && client !== ws) {
+        console.log('Inside each client', client.readyState)
+        if (client.readyState === WebSocket.OPEN && client !== wss) {
+            console.log('sending back to client')
             client.send(JSON.stringify(data))
         }
     })
 }
 
 wss.on('connection', ws => {
+    console.log('COnnected!!! and listening on...')
     let index;
     ws.on('message', (message) => {
         const data = JSON.parse(message);
         console.log('YOU HAVE A MESSAGE ', message);
+        console.log('MESSAGE TYPE ', data.type);
         switch (data.type) {
             case 'NEW_USER' :
                 index = users.length;
