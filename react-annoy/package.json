@@ -13,7 +13,7 @@
     "redux-saga": "^1.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"SET PORT=3002 && react-scripts start\" \"node server/app\"" ,
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
