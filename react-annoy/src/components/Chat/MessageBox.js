@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import InputElem from '../InputElem';
+import './chat.css'
 
 const MessageBox = (props) => {
+    const { user, sendMessage } = props;
     const [focus, setfocus] = useState(false);
     const sendmessage = (e) => {
         
         if (e.keyCode === 13) {
             e.preventDefault();
             debugger;
-            props.sendMessage({ message: e.target.value, sender: 'Alfie'});
+            sendMessage({ message: e.target.value, sender: user});
+            e.target.value = '';
         }  
     }
     return (
@@ -19,7 +22,7 @@ const MessageBox = (props) => {
                             ?<legend>Message</legend>
                             :null
                         }                        
-                        <input type="text" name="message-box" placeholder={!focus?"Enter Message and hit Enter":null} onFocus={() => setfocus(true)} 
+                        <input autoComplete="off" type="text" name="message-box" placeholder={!focus?"Enter Message and hit Enter":null} onFocus={() => setfocus(true)} 
                         onBlur={() => setfocus(false)} onKeyDown={(e) => sendmessage(e)}/>
                         {/* <InputElem elid="username" placeholder="Enter message and press Enter" focusme={props.focusme} 
                         blurme={props.blurme} eltype="text" loading={props.loading} focus={props.focus} 

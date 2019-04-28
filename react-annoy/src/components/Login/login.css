@@ -21,9 +21,9 @@
     cursor: pointer;
   }
   .grid-container-2 {
-    display: grid;
-    grid-template-columns: 50% 50%;  
-    border:none;
+    display: flex;
+    justify-content: flex-end;
+    border:none
   }
   fieldset {
     text-align: left;

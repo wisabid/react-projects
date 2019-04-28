@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext, useRef, useEffect } from 'react';
 // import loginWrapper from './../HOC/loginWrapper';
 import Home from '../../containers/Home';
 // import { Link } from 'react-router-dom';
@@ -7,71 +7,72 @@ import UserContext from '../../context/UserContext'
 import InputElem from '../InputElem';
 
 const Login = (props) => {
+        const { user, setUser } = useContext(UserContext);
+        const username = useRef('');
         const loginreducer = (state, action) => {
             switch (action.type) {
                 case 'loading':
                     debugger;
                     return {...state, loading: true}
+                
                 default:
                     return state;
             }
         }
         const [state, dispatch] = useReducer(loginreducer, {
-            pass : true,
-            loggedin : true,
-            focus : '',
+            pass : false,
+            loggedin : false,
             loading : false
         });
         console.log('abi', state);
         const { pass, loggedin, loading } = state;
-        if (!pass) {
-            return (
-                <UserContext.Consumer>
-                    {context => (
-                        <>
-                            <fieldset className="login">
-                                <InputElem elid="username" placeholder="Enter username and press Next" focusme={props.focusme.bind(this)} 
-                                blurme={props.blurme.bind(this)} eltype="text" loading={loading} focus={props.focus} 
-                                fieldname="Username"/>                   
-                                
-                            </fieldset>
-                            
-                            <div className="grid-container-2 login-links">
-                                {/* <span className="action-link"><Link to="/register">Create Account</Link></span> */}
-                                <span className="action-link">Create Account</span>
-                                <span className="action-btn"><button onClick={() => {context.setUser('Alfie');dispatch({type: 'loading'});props.onNext('passwrd')}}>Next</button></span>
-                            </div>
-                        </>
-                    )}
-                </UserContext.Consumer>
-                
-            )
+
+        const handleNext = (nme) => {
+            if (nme) {
+                dispatch({type: 'loading'})
+                setUser(nme);
+                localStorage.setItem('annoy_name', nme)
+            }
         }
-        else if (loggedin) {
+        useEffect(() => {
+            if (localStorage.getItem('annoy_name')) {
+                handleNext(localStorage.getItem('annoy_name'))
+            }
+            else {           
+                username.current.focus(); 
+            }  
+        }, [])
+
+        const handleEnter = (e) => {
+            if (e.keyCode === 13) {
+                handleNext(username.current.value)
+            }
+        }
+
+        
+        if (user) {
             return (
-                <Home loggedin={props.loggedin} />
+                <Home  />
             )
         }
         else {
             return (
-                <>
-                    <fieldset className="login">
-                    { props.focus === 'passwrd'
-                        ? <legend>Password</legend>
-                        : null
-                    } 
-                        
-                        <InputElem elid="password" fieldname="Password" focusme={props.focusme.bind(this)} 
-                        blurme={props.blurme.bind(this)} eltype="password" loading={props.loading} focus={props.focus}/> 
-                        
-                    </fieldset>
-                    <div className="grid-container-2 login-links">
-                        <span className="action-link"><a href="#" onClick={props.cancel}>Cancel</a></span>
-                        <span className="action-btn"><button onClick={props.onLogin}>Next</button></span>
-                    </div>
-                </>
+                
+                        <>
+                            <fieldset className="login">
+                                <legend>Name</legend>
+                                <input type="text" name="username" autoComplete="off" ref={username} onKeyDown={(e) => handleEnter(e)}/>               
+                            </fieldset>
+                            
+                            <div className="grid-container-2 login-links">
+                                <span className="action-btn"><button onClick={() => handleNext(username.current.value)}>Annoy Me</button></span>
+                            </div>
+                        </>
+
+                
             )
         }
+        
     }
 
 export default Login;

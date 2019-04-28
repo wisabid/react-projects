@@ -11,6 +11,9 @@ class App extends Component {
     this.setState({
       user : user
     }) 
+    if (!user) {
+      localStorage.removeItem('annoy_name')
+    }
   }
   render() {
     return (

@@ -19,6 +19,6 @@ export const handleApp = function* (params) {
     yield takeLatest('blur', blurupdate)
     yield takeLatest('showpass', showpassAsync)
     yield takeEvery('NEW_MESSAGE', action => {
-        params.webS.waitForConnection(() => params.webS.send(JSON.stringify({type : 'NEW_MESSAGE', data : {message : action.payload.message}})))   
+        params.webS.waitForConnection(() => params.webS.send(JSON.stringify({type : 'NEW_MESSAGE', data : {message : action.payload.message, sender : action.payload.sender}})))   
     })
 }

@@ -11,7 +11,7 @@ const setupSocket = (dispatch, username) => {
         console.table('MESSAGE_RECEIVED', data);
         switch(data.type) {
             case 'NEW_MESSAGE':
-                dispatch({type: 'SHOW_MESSAGE', data : data.data})
+                dispatch({type: 'SHOW_MESSAGE', data : data})
             default :
         }
     }

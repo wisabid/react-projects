@@ -2,32 +2,29 @@ import React, { useContext } from 'react';
 import './home.css';
 import UserContext from '../../context/UserContext';
 import InputElem from '../InputElem';
-import MessageBox from '../../containers/MessageBox'
+import MessageBox from '../../containers/MessageBox';
+import Messages from '../Chat/Messages';
+import AnnoyHeader from '../Chat/AnnoyHeader';
 
 const Home = (props) => {
-    const { user } = useContext(UserContext)
+    const { messages } = props;
+    const { user, setUser } = useContext(UserContext)
 
     const sendmessage = () => {
         debugger;
     }
     debugger;
+
+    const logout = () => {
+        setUser('')
+    }
     return (
         <section className="annoy-container">
-            <header>Hello {user}</header>
+            <AnnoyHeader logout={logout} user={user}/>
             <div>dfgdfgdfg</div>
-            <div>
-                <ul>
-                {
-                    props.messages.map((item, index) => {
-                        return (
-                            <li key={index}>item.message</li>
-                        )
-                    })
-                }
-                </ul>
-            </div>
+            <Messages messages={messages} />
             <div>dfgdfgdfg</div>
-            <MessageBox />
+            <MessageBox user={user}/>
         </section>
     )
 }

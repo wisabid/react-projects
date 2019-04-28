@@ -11,7 +11,7 @@ const broadcast = (data, ws) => {
     wss.clients.forEach(client => {
         console.log('Inside each client', client.readyState)
         if (client.readyState === WebSocket.OPEN && client !== wss) {
-            console.log('sending back to client')
+            console.log('sending back to client your data : ',data)
             client.send(JSON.stringify(data))
         }
     })
@@ -38,10 +38,11 @@ wss.on('connection', ws => {
                 }, ws)
                 break;
             case 'NEW_MESSAGE' : 
+                console.log('SWITCH CASE : ', data.data.message)
                 broadcast({
                     type : 'NEW_MESSAGE',
-                    message : data.message,
-                    sender : data.sender
+                    message : data.data.message,
+                    sender : data.data.sender
                 }, ws);
                 break;
             default : 
