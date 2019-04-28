@@ -3,7 +3,7 @@ var WebSocket = require('ws')
 
 const wss = new WebSocket.Server({ port : 8989 });
 console.log('welcome')
-const users = [];
+let users = [];
 
 const broadcast = (data, ws) => {
     // console.log('CLIENTS', wss.clients)
@@ -27,7 +27,8 @@ wss.on('connection', ws => {
         switch (data.type) {
             case 'NEW_USER' :
                 index = users.length;
-                users.push({ name : data.name, id : index +1});
+                users.push({ name : data.user, id : index +1});
+                console.log(users)
                 ws.send(JSON.stringify({
                     type : 'USERS_LIST',
                     users
@@ -37,8 +38,14 @@ wss.on('connection', ws => {
                     users
                 }, ws)
                 break;
+            case 'USER_EXIT':
+                users = users.filter(item => item.name !== data.user);
+                broadcast({
+                    type : 'USERS_LIST',
+                    users
+                }, ws)
+                break;
             case 'NEW_MESSAGE' : 
-                console.log('SWITCH CASE : ', data.data.message)
                 broadcast({
                     type : 'NEW_MESSAGE',
                     message : data.data.message,

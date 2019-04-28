@@ -3,17 +3,16 @@ import HomeComp from '../components/Home'
 
 const mapStateToProps = (state) => {
     return {
-        loggedin : state.rLogin.loggedin,
-        loading : state.rLogin.loading,
-        messages : state.rLogin.messages
+        messages : state.rLogin.messages,
+        users : state.rLogin.users
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        focusme : (event) => dispatch({type : 'focus', id : event.target.id}),
-        blurme : () => dispatch({type : 'blur'}),
-        sendmessage : (e) => dispatch({type : 'NEW_MESSAGE', payload : { message : e}})
+        addUser : (user) => dispatch({type:'NEW_USER', user}),
+        sendmessage : (e) => dispatch({type : 'NEW_MESSAGE', payload : { message : e}}),
+        userExit : (user) => dispatch({type : 'USER_EXIT', user})
     }
 }
 

@@ -21,4 +21,12 @@ export const handleApp = function* (params) {
     yield takeEvery('NEW_MESSAGE', action => {
         params.webS.waitForConnection(() => params.webS.send(JSON.stringify({type : 'NEW_MESSAGE', data : {message : action.payload.message, sender : action.payload.sender}})))   
     })
+    yield takeEvery('NEW_USER', action => {
+        params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
+    })
+
+    yield takeEvery('USER_EXIT', action => {
+        params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
+        params.dispatch({type : 'reset'})
+    })
 }

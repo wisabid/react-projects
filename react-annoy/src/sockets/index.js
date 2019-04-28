@@ -10,8 +10,12 @@ const setupSocket = (dispatch, username) => {
         let data = JSON.parse(event.data);
         console.table('MESSAGE_RECEIVED', data);
         switch(data.type) {
+            case 'USERS_LIST':
+                dispatch({type : 'SHOW_USERS', data: data})
+                break;
             case 'NEW_MESSAGE':
                 dispatch({type: 'SHOW_MESSAGE', data : data})
+                break;
             default :
         }
     }
