@@ -5,6 +5,7 @@ import Home from '../../containers/Home';
 import './login.css'
 import UserContext from '../../context/UserContext'
 import InputElem from '../InputElem';
+import chewing from '../../assets/images/chewing.gif'
 
 const Login = (props) => {
         const { user, setUser } = useContext(UserContext);
@@ -59,6 +60,7 @@ const Login = (props) => {
             return (
                 
                         <>
+                            <span className="annoy-logo"><img src={chewing} /></span>
                             <fieldset className="login">
                                 <legend>Name</legend>
                                 <input type="text" name="username" autoComplete="off" ref={username} onKeyDown={(e) => handleEnter(e)}/>               

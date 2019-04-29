@@ -4,3 +4,17 @@ ul {
     margin: 0;
     padding : 10px;
 }
+.messages, .users {
+    word-break: break-all;
+    overflow-y: auto;
+    border: 2px solid #4285f4;
+
+}
+header {
+    border: 2px solid #4285f4;
+    border-radius : 5px;   
+    padding: 5px; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center
+}

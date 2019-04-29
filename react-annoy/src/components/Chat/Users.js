@@ -3,7 +3,7 @@ import React from 'react';
 const Users = (props) => {
     const { users } = props;
     return (
-        <div>
+        <div className="users">
             <ul>
             {
                 users.map((item, index) => {

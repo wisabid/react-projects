@@ -3,7 +3,7 @@ import React from 'react';
 const Messages = (props) => {
     const { messages } = props;
     return (
-        <div>
+        <div className="messages">
             <ul>
             {
                 messages.map((item, index) => {

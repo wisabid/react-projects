@@ -31,3 +31,9 @@
     transform: rotate(360deg);
   }
 }
+
+
+.annoy-logo img {
+  border-radius: 70%;
+  WIDTH: 50%;
+}

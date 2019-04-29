@@ -1,0 +1,9 @@
+.annoy-section {
+    word-break: break-all;
+    overflow-y: auto;
+    border: 2px solid #4285f4;
+}
+
+img {
+    width: 200px;
+}
