@@ -1,7 +1,7 @@
 .annoy-section {
     word-break: break-all;
     overflow-y: auto;
-    border: 2px solid #4285f4;
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.12), inset 0 -1px 0 0 #dadce0;
 }
 
 img {

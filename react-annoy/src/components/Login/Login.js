@@ -9,13 +9,16 @@ import chewing from '../../assets/images/chewing.gif'
 
 const Login = (props) => {
         const { user, setUser } = useContext(UserContext);
+        
         const username = useRef('');
+        
         const loginreducer = (state, action) => {
             switch (action.type) {
                 case 'loading':
                     debugger;
                     return {...state, loading: true}
-                
+                case 'setUsername':
+                    return {...state, user_name : action.username}
                 default:
                     return state;
             }
@@ -23,10 +26,11 @@ const Login = (props) => {
         const [state, dispatch] = useReducer(loginreducer, {
             pass : false,
             loggedin : false,
-            loading : false
+            loading : false,
+            user_name : ''
         });
         console.log('abi', state);
-        const { pass, loggedin, loading } = state;
+        const { pass, loggedin, loading, user_name } = state;
 
         const handleNext = (nme) => {
             if (nme) {
@@ -49,6 +53,10 @@ const Login = (props) => {
                 handleNext(username.current.value)
             }
         }
+        //let { user_name, setUsername} = useState(username);
+        const handleNameCheck = (event) => {
+            dispatch({type: 'setUsername', username : username.current.value})                 
+        }
 
         
         if (user) {
@@ -63,9 +71,11 @@ const Login = (props) => {
                             <span className="annoy-logo"><img src={chewing} /></span>
                             <fieldset className="login">
                                 <legend>Name</legend>
-                                <input type="text" name="username" autoComplete="off" ref={username} onKeyDown={(e) => handleEnter(e)}/>               
+                                <input type="text" name="username" autoComplete="off" ref={username} onKeyDown={(e) => handleEnter(e)} 
+                                value={user_name} onChange={handleNameCheck}
+                                />              
                             </fieldset>
-                            
+                            <span>Name Taken!</span>                            
                             <div className="grid-container-2 login-links">
                                 <span className="action-btn"><button onClick={() => handleNext(username.current.value)}>Annoy Me</button></span>
                             </div>
