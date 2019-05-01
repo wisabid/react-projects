@@ -83,4 +83,9 @@
   .login-links .action-link {
     text-align: left;
   }
+
+  .login-error {
+    font-style: italic;
+    color: red;
+  }
   /* Login Component styles end here */

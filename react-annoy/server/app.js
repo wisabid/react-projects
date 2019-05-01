@@ -27,12 +27,16 @@ wss.on('connection', ws => {
         switch (data.type) {
             case 'NEW_USER' :
                 index = users.length;
-                users.push({ name : data.user, id : index +1});
-                console.log(users)
-                ws.send(JSON.stringify({
-                    type : 'USERS_LIST',
-                    users
-                }))
+                let chkname = users.find(item => item.name.toLowerCase() === data.user.toLowerCase())   
+                if (!chkname)  {    
+                    users.push({ name : data.user, id : index +1});
+                    console.log(users)
+                    ws.send(JSON.stringify({
+                        type : 'USERS_LIST',
+                        users
+                    }))
+                    
+                }
                 broadcast({
                     type : 'USERS_LIST',
                     users

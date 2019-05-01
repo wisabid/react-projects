@@ -16,9 +16,11 @@ const Login = (props) => {
             switch (action.type) {
                 case 'loading':
                     debugger;
-                    return {...state, loading: true}
+                    return {...state, loading: true, error_msg: '' }
                 case 'setUsername':
-                    return {...state, user_name : action.username}
+                    return {...state, user_name : action.username, error_msg: '' }
+                case 'error': 
+                    return {...state, error_msg: action.error}
                 default:
                     return state;
             }
@@ -27,16 +29,28 @@ const Login = (props) => {
             pass : false,
             loggedin : false,
             loading : false,
-            user_name : ''
+            user_name : '',
+            error_msg: ''
         });
         console.log('abi', state);
-        const { pass, loggedin, loading, user_name } = state;
+        const { pass, loggedin, loading, user_name, error_msg } = state;
+        const { users } = props;
 
         const handleNext = (nme) => {
-            if (nme) {
-                dispatch({type: 'loading'})
-                setUser(nme);
-                localStorage.setItem('annoy_name', nme)
+            if (nme && nme.length >= 2) {
+                debugger;
+                let chkname = users.find(item => item.name.toLowerCase() === nme.toLowerCase())   
+                if (!chkname)  {         
+                    dispatch({type: 'loading'})
+                    setUser(nme);
+                    localStorage.setItem('annoy_name', nme)
+                }
+                else {
+                    dispatch({type: 'error', error : 'Name Taken !'})        
+                }
+            }
+            else {
+                dispatch({type: 'error', error : 'Insufficient Length !'})  
             }
         }
         useEffect(() => {
@@ -50,12 +64,16 @@ const Login = (props) => {
 
         const handleEnter = (e) => {
             if (e.keyCode === 13) {
-                handleNext(username.current.value)
+                handleNext(username.current.value)                
             }
         }
         //let { user_name, setUsername} = useState(username);
         const handleNameCheck = (event) => {
-            dispatch({type: 'setUsername', username : username.current.value})                 
+            dispatch({type: 'setUsername', username : username.current.value});
+            let chkname = users.find(item => item.name.toLowerCase() === username.current.value.toLowerCase())   
+            if (chkname)  {         
+                dispatch({type: 'error', error : 'Name Taken !'})        
+            }                
         }
 
         
@@ -75,7 +93,7 @@ const Login = (props) => {
                                 value={user_name} onChange={handleNameCheck}
                                 />              
                             </fieldset>
-                            <span>Name Taken!</span>                            
+                            <span className="login-error">{error_msg}</span>                            
                             <div className="grid-container-2 login-links">
                                 <span className="action-btn"><button onClick={() => handleNext(username.current.value)}>Annoy Me</button></span>
                             </div>

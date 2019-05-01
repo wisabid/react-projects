@@ -3,10 +3,7 @@ import LoginComp from '../components/Login'
 
 const mapStateToProps = (state) => {
     return {
-        loggedin : state.rLogin.loggedin,
-        pass : state.rLogin.pass,
-        focus : state.rLogin.focus,
-        loading : state.rLogin.loading
+        users : state.rLogin.users
     }
 }
 
