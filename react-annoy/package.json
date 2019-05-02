@@ -13,7 +13,9 @@
     "redux-saga": "^1.0.2"
   },
   "scripts": {
-    "start": "concurrently \"SET PORT=3002 && react-scripts start\" \"node server/app\"" ,
+    "start": "concurrently \"SET PORT=3002 && react-scripts start\" \"node server/app\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -32,6 +34,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
     "prop-types": "^15.7.2",
-    "react-dev-utils": "^8.0.0"
+    "react-dev-utils": "^8.0.0",
+    "gh-pages": "^2.0.1"
   }
 }
