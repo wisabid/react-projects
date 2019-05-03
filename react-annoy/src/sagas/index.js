@@ -29,4 +29,8 @@ export const handleApp = function* (params) {
         params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
         params.dispatch({type : 'reset'})
     })
+
+    yield takeLatest('ANNOY', action => {
+        params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
+    })
 }

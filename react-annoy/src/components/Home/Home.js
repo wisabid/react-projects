@@ -6,7 +6,7 @@ import MessageBox from '../../containers/MessageBox';
 import Messages from '../Chat/Messages';
 import Users from '../Chat/Users';
 import AnnoyHeader from '../Chat/AnnoyHeader';
-import Annoy from '../Annoy'
+import Annoy from '../../containers/Annoy'
 
 const Home = (props) => {
     const { messages, addUser, users, userExit } = props;

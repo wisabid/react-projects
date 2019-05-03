@@ -3,8 +3,8 @@ import InputElem from '../InputElem';
 import './chat.css'
 
 const MessageBox = (props) => {
-    const { user, sendMessage } = props;
-    const [state, setState] = useState({ focus : false, msg : '' });
+    const { user, sendMessage, annoyit } = props;
+    const [state, setState] = useState({ focus : false, msg : '', sent: false });
     const sendmessage = (e) => {
         
         if (e.keyCode === 13) {
@@ -19,9 +19,18 @@ const MessageBox = (props) => {
     }
 
     const handleChange = (event) => {
-        debugger;
-        setState({msg : event.target.value})
+        setState({...state, msg : event.target.value})
         //sendMessage({ message: state.msg, sender: user});
+        if (event.target.value.split(' ').length >= 2){     
+            if (!state.sent) {      
+                setTimeout(() => {
+                    annoyit(`${user} is thinking a lot... :D`);
+                    setState({...state, sent: true})
+                }, 1000)
+            }        
+        }
+        
+       
     }
     return (
         <div className="msg-box">

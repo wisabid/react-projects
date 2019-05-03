@@ -3,13 +3,14 @@ import MessageBoxComp from '../components/Chat/MessageBox';
 
 const mapStateToProps = (state) => {
     return {
-
+        
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        sendMessage : (payload) => dispatch({type: 'NEW_MESSAGE', payload : payload })
+        sendMessage : (payload) => dispatch({type: 'NEW_MESSAGE', payload : payload }),
+        annoyit : (msg) => dispatch({type: 'ANNOY', msg})
     }
 }
 

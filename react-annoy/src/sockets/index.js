@@ -16,6 +16,8 @@ const setupSocket = (dispatch, username) => {
             case 'NEW_MESSAGE':
                 dispatch({type: 'SHOW_MESSAGE', data : data})
                 break;
+            case 'ANNOY':
+                dispatch({type: 'ANNOY_HEM', data: data})
             default :
         }
     }

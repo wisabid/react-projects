@@ -56,6 +56,12 @@ wss.on('connection', ws => {
                     sender : data.data.sender
                 }, ws);
                 break;
+            case 'ANNOY' : 
+                broadcast({
+                    type : 'ANNOY',
+                    msg : data.msg
+                }, ws);
+                break;
             default : 
                 break;
         }

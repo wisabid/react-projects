@@ -1,6 +1,7 @@
 const initialState = {
     users : [],
-    messages : []
+    messages : [],
+    annoys : []
 }
 
 const reducerLogin = (state = initialState, action) => {
@@ -12,6 +13,9 @@ const reducerLogin = (state = initialState, action) => {
             return {...newState, users : action.data.users}
         case 'reset' : 
             return {...newState, messages : []}
+        case 'ANNOY_HEM':
+        debugger;
+            return {...newState, annoys: newState.annoys.concat([action.data.msg])}
         default: 
             return newState;
     }    
