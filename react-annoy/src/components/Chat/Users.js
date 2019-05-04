@@ -8,7 +8,7 @@ const Users = (props) => {
             {
                 users.map((item, index) => {
                     return (
-                        <li key={item.id}>
+                        <li key={index}>
                             <span><b>{item.name}</b></span>
                         </li>
                     )

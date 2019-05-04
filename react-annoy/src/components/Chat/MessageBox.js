@@ -3,7 +3,7 @@ import InputElem from '../InputElem';
 import './chat.css'
 
 const MessageBox = (props) => {
-    const { user, sendMessage, annoyit } = props;
+    const { user, sendMessage, annoyit, typing } = props;
     const [state, setState] = useState({ focus : false, msg : '', sent: false });
     const sendmessage = (e) => {
         
@@ -19,12 +19,14 @@ const MessageBox = (props) => {
     }
 
     const handleChange = (event) => {
-        setState({...state, msg : event.target.value})
+        typing(user)
+        const msg = event.target.value;
+        setState({...state, msg : msg})
         //sendMessage({ message: state.msg, sender: user});
-        if (event.target.value.split(' ').length >= 2){     
+        if (msg.split(' ').length >= 2){     
             if (!state.sent) {      
                 setTimeout(() => {
-                    annoyit(`${user} is thinking a lot... :D`);
+                    annoyit(`${user} is thinking a lot on sending this - "${msg}" :D`);
                     setState({...state, sent: true})
                 }, 1000)
             }        

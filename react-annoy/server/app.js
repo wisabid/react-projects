@@ -62,6 +62,12 @@ wss.on('connection', ws => {
                     msg : data.msg
                 }, ws);
                 break;
+            case 'TYPING':
+                 broadcast({
+                    type : 'TYPING',
+                    user: data.user
+                }, ws);
+                break;
             default : 
                 break;
         }

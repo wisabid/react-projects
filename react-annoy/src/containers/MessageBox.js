@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         sendMessage : (payload) => dispatch({type: 'NEW_MESSAGE', payload : payload }),
-        annoyit : (msg) => dispatch({type: 'ANNOY', msg})
+        annoyit : (msg) => dispatch({type: 'ANNOY', msg}),
+        typing: (user) => dispatch({type : 'TYPING', user})
     }
 }
 

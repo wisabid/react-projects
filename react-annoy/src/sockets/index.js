@@ -18,6 +18,8 @@ const setupSocket = (dispatch, username) => {
                 break;
             case 'ANNOY':
                 dispatch({type: 'ANNOY_HEM', data: data})
+            case 'TYPING':
+                dispatch({type: 'TYPING_MSG', data: data})
             default :
         }
     }

@@ -33,4 +33,8 @@ export const handleApp = function* (params) {
     yield takeLatest('ANNOY', action => {
         params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
     })
+
+    yield takeLatest('TYPING', action => {
+        params.webS.waitForConnection(() => params.webS.send(JSON.stringify(action)));
+    })
 }

@@ -3,7 +3,8 @@ import AnnoyComp from '../components/Annoy'
 
 const mapStateToProps = (state) => {
     return {
-        annoys : state.rLogin.annoys
+        annoys : state.rLogin.annoys,
+        typingusers: state.rLogin.typingusers
     }
 }
 
