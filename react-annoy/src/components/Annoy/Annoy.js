@@ -16,7 +16,10 @@ const Annoy = (props) => {
             <Joke />
             <span className="annoy-logo"><img src={chewing} /></span>
             
-            <h5>ROFL</h5>
+            {annoys.length 
+                ?<h5>ROFL</h5>
+                :null
+            }
             <ul>
             {
                 annoys.map(annoy => {
@@ -26,7 +29,10 @@ const Annoy = (props) => {
                 })
             }
             </ul>
-            <h5>Typists</h5>
+            {typingusers.length
+                ?<h5>Typists</h5>
+                :null
+            }
             <ul>
             {
                 typingusers.map(user => {

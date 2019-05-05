@@ -25,10 +25,8 @@ const MessageBox = (props) => {
         //sendMessage({ message: state.msg, sender: user});
         if (msg.split(' ').length >= 2){     
             if (!state.sent) {      
-                setTimeout(() => {
                     annoyit(`${user} is thinking a lot on sending this - "${msg}" :D`);
                     setState({...state, sent: true})
-                }, 1000)
             }        
         }
         
